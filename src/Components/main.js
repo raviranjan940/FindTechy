@@ -55,51 +55,58 @@ function Main() {
                             alt="User Avatar"
                             className="avatar"
                         />
-						<div>{userData.name}</div>
+						<div className="name-btn">{userData.name}</div>
                     </div>
                     <div className="profile-details">
-                        <div className="follow-container">
+                        <div className="flex justify-between">
                             <div className="info">
-                                Followers: {userData.followers}
+                                <label>Followers: </label>{userData.followers}
                             </div>
                             <div className="info">
-                                Following: {userData.following}
+                                <label>Following: </label> {userData.following}
                             </div>
                         </div>
                         <div className="info">
-                            Public Repositories: {userData.public_repos}
+                            <label>Public Repositories: </label> {userData.public_repos}
                         </div>
-                        <div className="info">Bio: {userData.bio}</div>
-                        <div className="info">Location: {userData.location}</div>
+                        <div className="info">
+                            <label>Bio:</label> {userData.bio}
+                        </div>
+                        <div className="info">
+                            <label>Location: </label>
+                            {userData.location}
+                        </div>
                         <div>
                             <div className="info">
-                                Member Since:{" "}
+                                <label>Member Since:{" "}</label>
                                 {new Date(
                                     userData.created_at
                                 ).toLocaleDateString()}
                             </div>
                         </div>
-						<div className="flex gap-6">
-							<div>Username: {userData.login}</div>
+						<div className="flex justify-between">
+							<div>
+                                <label>Username: </label>
+                                {userData.login}
+                            </div>
 						    <a 
 								href={userData.blog}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="website-link"
 							>
-								Website
+								<div className="website-link">Website</div>
 							</a>
 						</div>
-						<div>
-							<a
-								href={userData.html_url}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="profile-link"
-							>
-								View Profile on GitHub
-							</a>
-						</div>
+                        <a
+							href={userData.html_url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<div className="profile-btn">
+							    View Profile on GitHub
+						    </div>
+						</a>
+						
                     </div>
                 </div>
             )}
