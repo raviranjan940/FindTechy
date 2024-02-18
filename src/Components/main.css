@@ -90,9 +90,10 @@ label{
     font-weight: 500;
 }
 
+/* CSS for devices with a maximum width of 600px (e.g., smartphones, tablet, etc.) */
 @media only screen and (max-width: 600px) {
-    /* CSS for devices with a maximum width of 600px (e.g., smartphones, tablet, etc.) */
     .main-container {
+      width: auto;
       padding: 10px;
     }
     form{
@@ -114,8 +115,10 @@ label{
       height: 200px;
     }
     .profile-details {
-      padding: 30px;
+      padding: 20px;
+      width:auto;
     }
   }
+
   
   
