@@ -1,17 +1,22 @@
 import React, { useState } from "react";
+import {Loader} from './Loader/Loader'
 import "./main.css";
 
 function Main() {
     const [username, setUsername] = useState("");
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
+    //Taking username as input
     const handleChange = (event) => {
         setUsername(event.target.value);
     };
 
+    // Handling the submit after fetching username from input field
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
         try {
             const response = await fetch(
                 `https://api.github.com/users/${username}`
@@ -21,16 +26,18 @@ function Main() {
                 setUserData(data);
                 setError("");
             } else {
-                setError("User not found!");
+                setError("User not found!!");
             }
         } catch (error) {
             console.error("Error fetching data:", error);
             setError("An error occurred while fetching data.");
         }
+        setIsLoading(false);
     };
 
     return (
         <div className="main-container">
+            {/* Username Search Section */}
             <div className="mt-10 text-xl font-medium">
                 FindTechy : GitHub Profile Viewer
             </div>
@@ -46,9 +53,16 @@ function Main() {
                     Search Profile
                 </button>
             </form>
+
+            {/* Error Handeling If Username not exists */}
             {error && <p className="error">{error}</p>}
-            {userData && (
+
+            {/* Enable Loader while fetching user profile details */}
+            {isLoading && <Loader/> }
+            {userData && !isLoading && (
                 <div className="profile divide-x-4">
+
+                    {/* Image and Name Container */}
                     <div className="img-container d-flex-col">
                         <img
                             src={userData.avatar_url}
@@ -57,6 +71,8 @@ function Main() {
                         />
 						<div className="name-btn">{userData.name}</div>
                     </div>
+
+                    {/* Profile Details Container */}
                     <div className="profile-details">
                         <div className="flex justify-between">
                             <div className="info">
@@ -74,7 +90,7 @@ function Main() {
                         </div>
                         <div className="info">
                             <label>Location: </label>
-                            {userData.location}
+                            {userData.location ? userData.location : "Not available"}
                         </div>
                         <div>
                             <div className="info">
